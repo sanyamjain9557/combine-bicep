@@ -25,9 +25,9 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release
     - name: publish
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.3.0
       with:
         name: published-app
-        path: ${{ github.workspace }}/bin/Release/netcoreapp3.1/publish
+        path: ${{env.DOTNET_ROOT}}/myapp
