@@ -15,18 +15,25 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      # required for all workflows
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'csharp' ]
     steps:
       - uses: actions/checkout@v3
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: csharp
+          languages: ${{ matrix.language }}
       - name: Autobuild
         uses: github/codeql-action/autobuild@v3 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:csharp"  
+          category: "/language:${{matrix.language}}" 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
