@@ -27,10 +27,10 @@
 name: SonarQube analysis
 
 on:
-  push:
-    branches: [ "test" ]
-  pull_request:
-    branches: [ "test" ]
+  #push:
+  #  branches: [ "test" ]
+  #pull_request:
+  #  branches: [ "test" ]
   workflow_dispatch:
 
 permissions:
