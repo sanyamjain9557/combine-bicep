@@ -61,6 +61,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: published-app
+      - name: Run Azure PowerShell inline script
+        uses: azure/powershell@v1
+        with:
+          inlineScript: |
+             Get-AzWebApp -ResourceGroupName web-app
+          azPSVersion: "latest"    
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
