@@ -10,4 +10,4 @@ module Webapp 'modules/webapp.bicep' = {
     webAppName: webAppName
   }
 }
-output webAppName string = Webapp.name
+output webAppName string = webAppName
