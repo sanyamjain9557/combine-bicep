@@ -22,3 +22,5 @@ resource appsite 'Microsoft.Web/sites@2022-09-01' = {
     }
   }
 }
+
+output webAppname string = appsite.name
