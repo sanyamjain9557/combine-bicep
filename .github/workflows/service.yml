@@ -4,9 +4,9 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: .
   DOTNET_VERSION: '6'
 'on':
-  #push:
-  #  branches:
-  #    - test
+  push:
+    branches:
+      - test
   #pull_request:
   #  branches:
   #    - test
@@ -46,6 +46,16 @@ jobs:
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: deployResource
+        id: deploy-resource
+        uses: azure/arm-deploy@v1
+        with:
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          resourceGroupName: web-app
+          template: ./main.bicep
+          failOnStdErr: false     
+      - name: Get deployed resource name
+        run: echo "::set-output name=deployed-resource-name::${{ steps.deploy-resource.outputs.webAppName }}"    
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
@@ -54,5 +64,5 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: '${{ env.AZURE_WEBAPP_NAME }}'
+          app-name: ${{ steps.deploy-resource.outputs.webAppName }}
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
