@@ -1,4 +1,4 @@
-name: DevPipeline
+name: servicepipe
 env:
   AZURE_WEBAPP_NAME: eusqaenvwebapp
   AZURE_WEBAPP_PACKAGE_PATH: .
