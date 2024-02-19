@@ -1,6 +1,6 @@
 name: servicepipe
 env:
-  AZURE_WEBAPP_NAME: eusqaenvwebapp
+  #AZURE_WEBAPP_NAME: eusqaenvwebapp
   AZURE_WEBAPP_PACKAGE_PATH: .
   DOTNET_VERSION: '6'
 'on':
